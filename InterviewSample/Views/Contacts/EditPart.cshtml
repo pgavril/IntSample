@@ -1,0 +1,48 @@
+@model InterviewSample.Models.Contacts
+
+<div class="panel panel-primary">
+
+    <div class="panel-heading">
+        <h3 class="panel-title">EditPart: @Model.LastName</h3>
+    </div>
+    <div class="panel-body">
+        <h4>Contacts</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.EmailAddress)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.BirthDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.NumberOfComputers)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.NumberOfComputers)
+            </dd>
+        </dl>
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

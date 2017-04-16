@@ -1,0 +1,30 @@
+﻿@model InterviewSample.Models.Addresses
+
+@{
+    ViewData["Title"] = "AddressesPartial";
+}
+<div class="panel panel-primary">
+
+<div class="panel-heading">
+    <h3 class="panel-title">Your Location: <em> @Model.Name </em></h3>
+</div>
+<div class="panel-body">
+   
+
+    <div id="Addreess Line">
+        <p>
+            <em>Addrress:</em>
+            @Model.AddressLine1
+        </p>
+        <p>
+
+            <em>Zip:</em>
+            @String.Format("{0:F}", Model.Zip)
+        </p>
+        @Html.ActionLink("Edit Address", "Edit",
+                    "Addresses",
+                    new { id = Model.ID },
+                    new { @class = "btn btn-sm" })
+    </div>
+</div>
+</div>

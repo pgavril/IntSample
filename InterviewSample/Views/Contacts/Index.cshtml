@@ -1,0 +1,117 @@
+@model IEnumerable<InterviewSample.Models.Contacts>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h2>List of Contacts</h2>
+    </div>
+  
+
+    <p>
+        <a asp-action="Create"  data-ajax="true" data-ajax-method="POST" 
+           data-ajax-mode="replace" data-ajax-update="#ze-partial-render" class="glyphicon glyphicon-plus-sign btn-sm"></a>
+    </p>
+    
+
+<div class='panel-body'>
+    
+    <div class='table-responsive'>
+        <table class='table'>
+            <thead>
+                <tr>
+
+                    <th>Search By First Name</th>
+                    <th>Search By Last Name</th>
+                
+                </tr>
+            </thead>
+            <tbody>
+             
+                    <tr>
+                        <td>
+                            <form action="/Contacts/SearchFirstName" method="get">
+                                <input type="text" name="q" />
+                                <input type="submit" />
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/Contacts/SearchLastName" method="get">
+                                <input type="text" name="q" />
+                                <input type="submit" />
+                            </form>
+                        </td>
+                        <td>
+                   
+                    </tr>
+          
+            </tbody>
+
+        </table>
+        <div>
+        </div>
+      
+        <div class='row'>
+            <div class='col-md-6' *ngIf='listFilter'>
+                <h3>Searching: </h3>
+            </div>
+        </div>
+
+     
+            <div class='table table-responsive'>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LastName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EmailAddress)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.BirthDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NumberOfComputers)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-left">
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </td>
+                                <td class="text-left">
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.EmailAddress)
+                                </td>
+                                <td class="text-center">
+                                    @Html.DisplayFor(modelItem => item.BirthDate)
+                                </td>
+                                <td class="text-center" >
+                                    @Html.DisplayFor(modelItem => item.NumberOfComputers)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.ID" data-ajax="true" data-ajax-method="GET" 
+                             data-ajax-mode="replace" data-ajax-update="#ze-partial-render" class="glyphicon glyphicon-pencil btn-sm"></a> |
+                                    <a asp-action="Details" asp-route-id="@item.ID" data-ajax="true" data-ajax-method="GET" 
+                             data-ajax-mode="replace" data-ajax-update="#ze-partial-render" class="glyphicon glyphicon-info-sign btn-sm"></a> |
+                                    <a asp-action="Delete" asp-route-id="@item.ID data-ajax="true" data-ajax-method="GET" 
+                             data-ajax-mode="replace" data-ajax-update="#ze-partial-render" class="glyphicon glyphicon-minus-sign btn-sm"></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>

@@ -1,0 +1,112 @@
+@model InterviewSample.Models.Contacts
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+
+<button type="button" id="showAll" class="Seebtn">See address</button>
+
+<div
+    id = "divShowAddress">
+</div>
+
+
+<div class='row'>
+    <div class='col-md-6' *ngIf='listFilter'>
+        <h3>See addresses: </h3>
+        <a asp-action="ShowAllAddresses" asp-route-area="Global" asp-route-id="@Model.ID " data-ajax="true" data-ajax-method="GET" 
+           data-ajax-mode="replace" data-ajax-update="#ze-partial-render" class="glyphicon glyphicon-pencil btn-md">Show  </a>
+    </div>
+    
+   
+    @*<div class='col-md-6>
+        <a asp-action="ShowAllInfo" asp-route-id="@Model.ID"> here </a> |
+    </div>*@
+</div>
+
+
+<div>
+    <h4>Contacts</h4>
+    <hr /> 
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailAddress)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmailAddress)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfComputers)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfComputers)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+    <a asp-action="Index">Back to List</a> |
+    @using (Html.BeginForm("SearchLastName", "Contacts", FormMethod.Get))
+    {
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+    }
+    
+    @*@Ajax.ActionLink(" ", "Edit", new { id = Model[i].RoleID }, new AjaxOptions { UpdateTargetId = "ze-partial-render", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" }, new { @class = "glyphicon glyphicon-pencil btn-sm approved", })*@
+
+
+
+    <a id ="content" asp-action="EditPart" asp-controller="Contacts"  asp-route-id="@Model.ID" data-ajax="true" data-ajax-method="GET" data-ajax-mode="insert" data-ajax-update="#content"
+       class="glyphicon glyphicon-globe btn-md">See Home Address</a></div>
+
+<div id="content">
+here</div>
+
+    
+@section scripts
+{
+@*<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
+
+        <script>
+            $(document).ready(function() {
+
+                $('.Seebtn').click(function() {
+
+                    $.ajax({
+                        url: '@Url.Action("ShowAllPart", "Contacts")',
+                        data: {id: "@Model.ID"},
+                        type: 'GET', //POST if you want to save, GET if you want to fetch data from server
+                        success: function(data) {
+                            // here comes your response after calling the server
+                          // alert('getting data');
+                            $("#divShowAddress").html(data);
+                        },
+                        error: function(obj) {
+                            alert('Something happened');
+                        }
+                    });
+                });
+            });
+        </script>
+    }
