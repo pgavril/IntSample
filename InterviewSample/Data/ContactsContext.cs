@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using InterviewSample.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace InterviewSample.Data
 {
@@ -17,18 +18,21 @@ namespace InterviewSample.Data
 
         public ContactsContext(DbContextOptions<ContactsContext> options) : base(options)
         {
+            //this.Configuration.LazyLoadingEnabled = false;
         }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Contacts>().ToTable("Contact");
             modelBuilder.Entity<Addresses>().ToTable("Address");
-         //   modelBuilder.Entity<ContactToAddress>().ToTable("ContactToAddress");
+            //   modelBuilder.Entity<ContactToAddress>().ToTable("ContactToAddress");
 
-         //   var ent = modelBuilder.Entity("DateTime");
-           // ent.Property<Contacts>("BirthDate");
+           // modelBuilder.Entity<Contacts>().HasMany(d => d.Addresses).WithOne(dk => dk.Contact).OnDelete(DeleteBehavior.Cascade);// .WillCascadeOnDelete(false);
+            //   var ent = modelBuilder.Entity("DateTime");
+            // ent.Property<Contacts>("BirthDate");
 
-        //    ent.HasBaseType("datetime2");
+            //    ent.HasBaseType("datetime2");
 
             // modelBuilder.Property("BirthDate").
             //      .Configure(c => c.HasColumnType("datetime2"));

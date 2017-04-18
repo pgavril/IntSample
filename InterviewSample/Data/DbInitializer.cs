@@ -29,6 +29,14 @@ namespace InterviewSample.Data
             new Contacts{FirstName="Peggy",LastName="Justice",BirthDate=DateTime.Parse("2001-09-01")},
             new Contacts{FirstName="Laura",LastName="Norman",BirthDate=DateTime.Parse("2003-09-01")},
             new Contacts{FirstName="Nino",LastName="Olivetto",BirthDate=DateTime.Parse("2005-09-01")}
+            //     new Contacts{ID=4022,FirstName="Carson",LastName="Alexander",BirthDate=DateTime.Parse("2005-09-01")},
+            //new Contacts{ID=4032,FirstName="Meredith",LastName="Alonso",BirthDate=DateTime.Parse("2002-09-01")},
+            //new Contacts{ID=4042,FirstName="Arturo",LastName="Anand",BirthDate=DateTime.Parse("2003-09-01")},
+            //new Contacts{ID=402,FirstName="Gytis",LastName="Barzdukas",BirthDate=DateTime.Parse("2002-09-01")},
+            //new Contacts{ID=402,FirstName="Yan",LastName="Li",BirthDate=DateTime.Parse("2002-09-01")},
+            //new Contacts{ID=22,FirstName="Peggy",LastName="Justice",BirthDate=DateTime.Parse("2001-09-01")},
+            //new Contacts{ID=42,FirstName="Laura",LastName="Norman",BirthDate=DateTime.Parse("2003-09-01")},
+            //new Contacts{ID=2,FirstName="Nino",LastName="Olivetto",BirthDate=DateTime.Parse("2005-09-01")}
             };
             foreach( var s in contact)
             {

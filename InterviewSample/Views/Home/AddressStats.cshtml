@@ -1,0 +1,33 @@
+﻿@model IEnumerable<InterviewSample.Models.StatisticsViewModel>
+
+    @{
+        ViewData["Title"] = "Address Statistics";
+    }
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        <h2>Address Statistics</h2>
+    </div>
+   
+            <table>
+                <tr>
+                    <th class="text-center">
+                        Address
+                    </th>
+                    <th  class="text-center">
+                         Number of contacts
+                    </th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td class="text-center">
+                            @item.AddressCount
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>

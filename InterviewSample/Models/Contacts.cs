@@ -11,16 +11,18 @@ namespace InterviewSample.Models
     public class Contacts
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Display(Name = "Id")]
         public int ID { get; set; }
 
         [Required]
         [DisplayName(" First Name ")]
-        [StringLength(160)]
+        [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
         public String FirstName{get; set; }
 
         [Required]
         [DisplayName(" Last Name ")]
-        [StringLength(160)]
+        [StringLength(100, MinimumLength = 1)]
+        [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$")]
         public String LastName { get; set; }
 
         [DisplayName(" Email ")]
@@ -32,10 +34,20 @@ namespace InterviewSample.Models
 
         [DisplayName(" DOB ")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime BirthDate { get; set; }
 
         [DisplayName(" # of rigs ")]
         public int NumberOfComputers { get; set; }
+
+        [Display(Name = "Full Name")]
+        public string FullName
+        {
+            get
+            {
+                return LastName + ", " + FirstName;
+            }
+        }
 
         public virtual ICollection<Addresses> Addresses { get; set; }
 

@@ -23,8 +23,8 @@
             <thead>
                 <tr>
 
-                    <th>Search By First Name</th>
                     <th>Search By Last Name</th>
+                    <th>Search By First Name</th>
                 
                 </tr>
             </thead>
@@ -34,13 +34,16 @@
                         <td>
                             <form action="/Contacts/SearchFirstName" method="get">
                                 <input type="text" name="q" />
-                                <input type="submit" />
+                                <input type="submit"  value="Search" class="btn btn-default"  />
+                                <a asp-action="Index">Back to Full List</a>
                             </form>
                         </td>
                         <td>
                             <form action="/Contacts/SearchLastName" method="get">
                                 <input type="text" name="q" />
-                                <input type="submit" />
+                                <input type="submit"  value="Search" class="btn btn-default"  />
+                                <a asp-action="Index">Back to Full List</a>
+
                             </form>
                         </td>
                         <td>
@@ -52,66 +55,95 @@
         </table>
         <div>
         </div>
-      
-        <div class='row'>
-            <div class='col-md-6' *ngIf='listFilter'>
-                <h3>Searching: </h3>
+        <form asp-action="Index" method="get">
+            <div class="form-actions no-color">
+                <p>
+                    Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+                    <input type="submit" value="Search" class="btn btn-default" /> |
+                    <a asp-action="Index">Back to Full List</a>
+                </p>
             </div>
-        </div>
+        </form>
 
      
             <div class='table table-responsive'>
-                <table class="table table-hover table-bordered">
+                <table class="table table-hover ">
                     <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.FirstName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.LastName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.EmailAddress)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.BirthDate)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.NumberOfComputers)
-                            </th>
-                            <th></th>
-                        </tr>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ID)
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.FirstName)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.LastName)
+                        </th>*@
+                        <th>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.LastName)</a>
+                        </th>
+
+                        <th>
+                            @Html.DisplayNameFor(model => model.EmailAddress)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.BirthDate)
+                        </th>*@
+                        <th>
+                            <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">@Html.DisplayNameFor(model => model.BirthDate)</a>
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NumberOfComputers)
+                        </th>
+                        <th></th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td class="text-left">
-                                    @Html.DisplayFor(modelItem => item.FirstName)
-                                </td>
-                                <td class="text-left">
-                                    @Html.DisplayFor(modelItem => item.LastName)
-                                </td>
-                                <td class="text-center">
-                                    @Html.DisplayFor(modelItem => item.EmailAddress)
-                                </td>
-                                <td class="text-center">
-                                    @Html.DisplayFor(modelItem => item.BirthDate)
-                                </td>
-                                <td class="text-center" >
-                                    @Html.DisplayFor(modelItem => item.NumberOfComputers)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.ID" data-ajax="true" data-ajax-method="GET" 
-                             data-ajax-mode="replace" data-ajax-update="#ze-partial-render" class="glyphicon glyphicon-pencil btn-sm"></a> |
-                                    <a asp-action="Details" asp-route-id="@item.ID" data-ajax="true" data-ajax-method="GET" 
-                             data-ajax-mode="replace" data-ajax-update="#ze-partial-render" class="glyphicon glyphicon-info-sign btn-sm"></a> |
-                                    <a asp-action="Delete" asp-route-id="@item.ID data-ajax="true" data-ajax-method="GET" 
-                             data-ajax-mode="replace" data-ajax-update="#ze-partial-render" class="glyphicon glyphicon-minus-sign btn-sm"></a>
-                                </td>
-                            </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.FirstName)
+                            </td>
+                            <td class="text-left">
+                                @Html.DisplayFor(modelItem => item.LastName)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.EmailAddress)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.BirthDate)
+                            </td>
+                            <td class="text-center">
+                                @Html.DisplayFor(modelItem => item.NumberOfComputers)
+                            </td>
+                            <td>
+                                @{
+                                    foreach (var ad in item.Addresses)
+                                    {
+                                        @ad.ID @:  @ad.Name <br />
                         }
+                                }
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.Addresses.FirstOrDefault())
+                            </td>*@
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ID" data-ajax="true" data-ajax-method="GET"
+                                   data-ajax-mode="replace" data-ajax-update="#ze-partial-render" class="glyphicon glyphicon-pencil btn-sm"></a> |
+                                <a asp-action="Details" asp-route-id="@item.ID" data-ajax="true" data-ajax-method="GET"
+                                   data-ajax-mode="replace" data-ajax-update="#ze-partial-render" class="glyphicon glyphicon-info-sign btn-sm"></a> |
+                                <a asp-action="Delete" asp-route-id="@item.ID data-ajax="true" data-ajax-method="GET"
+                                   data-ajax-mode="replace" data-ajax-update="#ze-partial-render" class="glyphicon glyphicon-minus-sign btn-sm"></a>
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
+                
             </div>
         </div>

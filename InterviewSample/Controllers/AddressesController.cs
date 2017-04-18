@@ -21,20 +21,14 @@ namespace InterviewSample.Controllers
             _context = context;    
         }
 
-        // GET: Addresses
-        public async Task<IActionResult> Index1(IQueryable param)
-        {
-            if(param == null)
-                 return View(await _context.Addresses.ToListAsync());
-            else
-            {
-                return View(param);
-            }
-        }
+     
         public async Task<IActionResult> Index()
         {
-           
-                return View(await _context.Addresses.ToListAsync());
+            //var courses = _context.Contacts
+            //.Include(c => c.Addresses)
+            //.AsNoTracking();
+
+            return View(await _context.Addresses.ToListAsync());
          
         }
         // GET: Addresses/Details/5

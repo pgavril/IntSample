@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 
-<button type="button" id="showAll" class="Seebtn">See address</button>
+<button type="button" id="showAll" class="Seebtn">Work addresses</button>
 
 <div
     id = "divShowAddress">
@@ -18,9 +18,10 @@
     <div class='col-md-6' *ngIf='listFilter'>
         <h3>See addresses: </h3>
         <a asp-action="ShowAllAddresses" asp-route-area="Global" asp-route-id="@Model.ID " data-ajax="true" data-ajax-method="GET" 
-           data-ajax-mode="replace" data-ajax-update="#ze-partial-render" class="glyphicon glyphicon-pencil btn-md">Show  </a>
+           data-ajax-mode="replace" data-ajax-update="#here" >Show Address List for this guy </a>
     </div>
-    
+    <div id="here">
+    </div> 
    
     @*<div class='col-md-6>
         <a asp-action="ShowAllInfo" asp-route-id="@Model.ID"> here </a> |
@@ -78,10 +79,15 @@
 
 
     <a id ="content" asp-action="EditPart" asp-controller="Contacts"  asp-route-id="@Model.ID" data-ajax="true" data-ajax-method="GET" data-ajax-mode="insert" data-ajax-update="#content"
-       class="glyphicon glyphicon-globe btn-md">See Home Address</a></div>
+       >See Home Address</a></div>
 
 <div id="content">
-here</div>
+    here</div>
+
+<button type="button" id="showWork" class="WorkAddress">Home address </button>
+
+<div id="divWorkAddress">
+</div>
 
     
 @section scripts
@@ -101,6 +107,23 @@ here</div>
                             // here comes your response after calling the server
                           // alert('getting data');
                             $("#divShowAddress").html(data);
+                        },
+                        error: function(obj) {
+                            alert('Something happened');
+                        }
+                    });
+                });
+
+                $('.WorkAddress').click(function() {
+
+                    $.ajax({
+                        url: '@Url.Action("EditPart", "Contacts")',
+                        data: {id: "@Model.ID"},
+                        type: 'GET', //POST if you want to save, GET if you want to fetch data from server
+                        success: function(data) {
+                            // here comes your response after calling the server
+                          // alert('getting data');
+                            $("#divWorkAddress").html(data);
                         },
                         error: function(obj) {
                             alert('Something happened');
