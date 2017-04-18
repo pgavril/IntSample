@@ -12,9 +12,10 @@ namespace InterviewSample.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
+        [DisplayName("ID of the Contact")]
         public int? ContactID { get; set; }
 
-        [DisplayName("Comments")]
+        [DisplayName("Location")]
         public String Name { get; set; }
 
         [DisplayName(" Address...")]
