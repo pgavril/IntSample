@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-@*<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
         <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -14,10 +14,9 @@
             <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
             <div class="carousel-caption" role="option">
                 <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
+                    Managing Contacts
+                    <a class="btn btn-default" asp-area="" asp-controller="Contacts" asp-action="Index">Show All Contacts</a>
+
                 </p>
             </div>
         </div>
@@ -25,10 +24,9 @@
             <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
             <div class="carousel-caption" role="option">
                 <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
+                     Managing Addresses
+                    <a class="btn btn-default" h<a asp-area="" asp-controller="Addresses" asp-action="Index">Show All Addresses</a>
+                  
                 </p>
             </div>
         </div>
@@ -36,9 +34,9 @@
             <img src="~/images/banner3.svg" alt="Package Management" class="img-responsive" />
             <div class="carousel-caption" role="option">
                 <p>
-                    Bring in libraries from NuGet, Bower, and npm, and automate tasks using Grunt or Gulp.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525029&clcid=0x409">
-                        Learn More
+                   Call group by to show Number of addresses belonging to contact
+                    <a class="btn btn-default" asp-area="" asp-controller="Home" asp-action="AddressStats">Show Address Statistics
+                       
                     </a>
                 </p>
             </div>
@@ -47,9 +45,8 @@
             <img src="~/images/banner4.svg" alt="Microsoft Azure" class="img-responsive" />
             <div class="carousel-caption" role="option">
                 <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
+                    Call group by to show Number of computers at contact
+                    <a class="btn btn-default"  asp-area="" asp-controller="Home" asp-action="ComputerStatistics">Show Computer Statisticss
                     </a>
                 </p>
             </div>
@@ -63,7 +60,7 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
-</div>*@
+</div>
 
 <div class="jumbotron">
     <h1>Contact Management</h1>
