@@ -187,8 +187,8 @@ namespace InterviewSample.Controllers
             var q = from d in _context.Addresses
                                    orderby d.Name
                                    select d;
-           // var ls = new SelectList(q.AsNoTracking(), "ID", "Name");
-          //  ViewBag.AddressID = ls;//new SelectList(q.AsNoTracking(), "AddressID", "Name", selectaddress);
+            var ls = new SelectList(q.AsNoTracking(), "ID", "Name");
+            ViewBag.AddressID = ls;//new SelectList(q.AsNoTracking(), "AddressID", "Name", selectaddress);
         }
        
         // POST: Contacts/Edit/5

@@ -19,13 +19,22 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
         </div>
-        <div class="form-group">
+        @*<div class="form-group">
             <label asp-for="ContactID" class="col-md-2 control-label"></label>
             <div class="col-md-10">
                 <input asp-for="ContactID" class="form-control" />
                 <span asp-validation-for="ContactID" class="text-danger"></span>
             </div>
+        </div>*@
+        <div class="form-group">
+            <label asp-for="ContactID" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <select asp-for="ContactID" class="form-control" asp-items="ViewBag.contactsID">
+                    <option value="">-- Select Contact --</option>
+                </select>
+            </div>
         </div>
+     
         <div class="form-group">
             <label asp-for="AddressLine1" class="col-md-2 control-label"></label>
             <div class="col-md-10">

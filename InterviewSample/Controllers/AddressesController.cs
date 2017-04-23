@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using InterviewSample.Data;
 using InterviewSample.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore.Extensions.Internal;
 
 namespace InterviewSample.Controllers
 {
@@ -27,7 +28,7 @@ namespace InterviewSample.Controllers
             //var courses = _context.Contacts
             //.Include(c => c.Addresses)
             //.AsNoTracking();
-
+            await PopulateContactsDropDownList();
             return View(await _context.Addresses.ToListAsync());
          
         }
@@ -49,9 +50,30 @@ namespace InterviewSample.Controllers
             return View(addresses);
         }
 
-        // GET: Addresses/Create
-        public IActionResult Create()
+        private async Task<int> PopulateContactsDropDownList(object selectaddress = null)
         {
+            var q =  await (from d in _context.Contacts
+                    orderby d.LastName
+                    select d).ToListAsync();
+          //   var ls = new SelectList(q, "ID", "LastName");
+             ViewBag.contactsID = new SelectList(q, "ID", "LastName");
+            return 0;
+        }
+
+        private async Task<int> PopulateDropDownList(object selectaddress = null)
+        {
+            var q = await (from d in _context.Contacts
+                           orderby d.LastName
+                           select d).ToListAsync();
+            //   var ls = new SelectList(q, "ID", "LastName");
+            ViewBag.contactsID = new SelectList(q, "LastName", "LastName");
+            return 0;
+        }
+
+        // GET: Addresses/Create
+        public async Task<IActionResult> Create()
+        {
+            await PopulateContactsDropDownList();
             return View();
         }
 
@@ -62,6 +84,7 @@ namespace InterviewSample.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,ContactID,Name,AddressLine1,AddressLine2,City,StateCode,Zip")] Addresses addresses)
         {
+            await PopulateContactsDropDownList();
             if (ModelState.IsValid)
             {
                 _context.Add(addresses);
@@ -84,6 +107,7 @@ namespace InterviewSample.Controllers
             {
                 return NotFound();
             }
+            await PopulateContactsDropDownList();
             return View(addresses);
         }
 
@@ -98,7 +122,7 @@ namespace InterviewSample.Controllers
             {
                 return NotFound();
             }
-
+            await PopulateContactsDropDownList();
             if (ModelState.IsValid)
             {
                 try
